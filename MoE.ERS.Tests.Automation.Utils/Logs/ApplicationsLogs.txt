@@ -1,0 +1,2 @@
+﻿2017-08-21 12:36:15,826 INFO [1] MoE.ERS.Tests.Automation.Utils.Logger.LogMessage - TestMethod(s) configured is not available in application.Please check App.config.
+2017-08-21 12:38:39,777 INFO [1] MoE.ERS.Tests.Automation.Utils.Logger.LogMessage - TestMethod(s) configured is not available in application.Please check App.config.
