@@ -15,7 +15,7 @@ namespace MoE.ERS.Tests.Automation.DataSource
         private static string TestDataFileConnection()
         {
             //var fileName = Directory.GetCurrentDirectory() + "\\MoE.ERS.Tests.Automation.DataSource1\\TestData.xlsx";
-            var fileName = @"D:\Ayyappan\Official\ERS\LocalRepository\MoE.ERS.Tests.Automation\MoE.ERS.Tests.Automation.DataSource\TestData.xlsx";
+            var fileName = @"D:\Ayyappan\Official\ERS\Latest-Nunit\MoE.ERS.Tests.Automation\MoE.ERS.Tests.Automation.DataSource\TestData.xlsx";
             var con = string.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = {0}; Extended Properties=Excel 12.0;", fileName);
             return con;
         }
