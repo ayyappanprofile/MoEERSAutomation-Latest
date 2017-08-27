@@ -4,6 +4,7 @@ using OpenQA.Selenium;
 using System.Linq;
 using MoE.ERS.Tests.Automation.Utils.Reports;
 using MoE.ERS.Tests.Automation.Utils;
+using System.Configuration;
 
 namespace MoE.ERS.Tests.Automation.BaseLibrary
 {
@@ -15,12 +16,12 @@ namespace MoE.ERS.Tests.Automation.BaseLibrary
 
         public OperationBase()
         {
-            LogIn logInData = RealTestData<LogIn>.GetTestData("ApplicationConfiguration").First();            
+            LogIn logInData = RealTestData<LogIn>.GetTestData("LogInConfiguration").First();            
             Url = logInData.Url;
             UserName = logInData.UserName;
             Password = logInData.Password;
             Browser = logInData.Browser;
-            extentHtmlReportGenerator = ExtentHtmlReportGenerator.GetReportInstance();
+            extentHtmlReportGenerator = ExtentHtmlReportGenerator.GetReportInstance();            
             if(!extentHtmlReportGenerator.IsReportConfigured)
                InitReport();
         }

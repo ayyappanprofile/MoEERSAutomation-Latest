@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ApplicationConfiguration>
+<TestContainer>D:\Ayyappan\Official\ERS\Latest-Nunit\MoE.ERS.Tests.Automation\MoE.ERS.Tests.Automation.DataSource\TestData.xlsx</TestContainer>
+<ExecutableContainer>D:\Ayyappan\Official\ERS\Latest-Nunit\MoE.ERS.Tests.Automation\MoE.ERS.Tests.Automation\Release\TestDataAutomated.bat</ExecutableContainer>
+<ProviderName>Provider=Microsoft.ACE.OLEDB.12.0;Data Source = {0}; Extended Properties=Excel 12.0;</ProviderName>
+</ApplicationConfiguration>

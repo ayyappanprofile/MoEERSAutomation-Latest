@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace MoE.ERS.Tests.Automation.Entities
 {
-    public abstract class EntityBase
+    public class EntityBase
     {
+        public string TestContainerName { get; set; }
         public string TestName { get; set; }
+
+        public string CanExecute { get; set; }
     }
 }

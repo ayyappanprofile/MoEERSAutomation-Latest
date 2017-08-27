@@ -57,12 +57,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\MoE.ERS.Tests.Automation.DataSource\bin\Debug\MoE.ERS.Tests.Automation.DataSource.dll</HintPath>
     </Reference>
-    <Reference Include="MoE.ERS.Tests.Automation.Entities, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MoE.ERS.Tests.Automation.Entities">
       <HintPath>..\MoE.ERS.Tests.Automation.Entities\bin\Debug\MoE.ERS.Tests.Automation.Entities.dll</HintPath>
     </Reference>
-    <Reference Include="MoE.ERS.Tests.Automation.Utils, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="MoE.ERS.Tests.Automation.Utils">
       <HintPath>..\MoE.ERS.Tests.Automation.Utils\bin\Debug\MoE.ERS.Tests.Automation.Utils.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework, Version=3.7.1.0, Culture=neutral, PublicKeyToken=2638cd05610744eb, processorArchitecture=MSIL">

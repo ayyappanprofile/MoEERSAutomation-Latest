@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="EntityBase.cs" />
     <Compile Include="FindFormRT.cs" />
+    <Compile Include="ApplicationConfiguration.cs" />
     <Compile Include="ReportConfiguration.cs" />
     <Compile Include="Welcome.cs" />
     <Compile Include="LogIn.cs" />

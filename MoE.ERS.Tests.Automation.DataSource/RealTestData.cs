@@ -6,17 +6,18 @@ using System.Data.OleDb;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Configuration;
 
 namespace MoE.ERS.Tests.Automation.DataSource
 {
     public class RealTestData<Entity> where Entity : EntityBase, new()
-    {
-        public string TestDataSheetPath { get; set; }
+    {   
         private static string TestDataFileConnection()
         {
-            //var fileName = Directory.GetCurrentDirectory() + "\\MoE.ERS.Tests.Automation.DataSource1\\TestData.xlsx";
-            var fileName = @"D:\Ayyappan\Official\ERS\Latest-Nunit\MoE.ERS.Tests.Automation\MoE.ERS.Tests.Automation.DataSource\TestData.xlsx";
-            var con = string.Format(@"Provider=Microsoft.ACE.OLEDB.12.0;Data Source = {0}; Extended Properties=Excel 12.0;", fileName);
+            ApplicationConfiguration appConfiguration = ApplicationConfigurationData.GetConfiguredData();
+            string fileName = appConfiguration.TestDataContainer;
+            string providerName = appConfiguration.ProviderName;
+            var con = string.Format(providerName, fileName);
             return con;
         }
         public static IList<Entity> GetTestData(string sheetName)
@@ -75,7 +76,7 @@ namespace MoE.ERS.Tests.Automation.DataSource
                 using (var connection = new OleDbConnection(TestDataFileConnection()))
                 {
                     connection.Open();
-                    var entityList = connection.Query<Entity>(query);
+                    var entityList = connection.Query<Entity>(query);                
                     connection.Close();
                     return entityList;
                 }
@@ -103,5 +104,7 @@ namespace MoE.ERS.Tests.Automation.DataSource
             { throw; }
             return excelQueryBuilder.ToString();
         }
+
+
     }
 }
