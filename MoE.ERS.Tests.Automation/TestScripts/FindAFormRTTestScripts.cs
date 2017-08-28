@@ -193,7 +193,7 @@ namespace MoE.ERS.Tests.Automation.TestScripts
                 lstDropdownElementsCaption = findFormRTPage.GetFTDropdownElementsCaption();
                 findFormRTPage.ClickOnFTDropdown();
                 bool validationResult = ((lstDropdownElementsCaption.FindAll(caption => caption.ToUpper().Contains(findFormRT.FTTextActual.Trim().ToUpper())).Count
-                                                == lstDropdownElementsCaption.Count)
+                                          == lstDropdownElementsCaption.Count)
                                           || lstDropdownElementsCaption.Contains(findFormRT.NoResultsFoundCaptionExpected.Trim()));
                 Assert.AreEqual(true, validationResult);             
             }

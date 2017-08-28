@@ -41,7 +41,7 @@ namespace MoE.ERS.Tests.Automation.TestRunner
             List<EntityBase> lstTestData;
             excel.Application xlAppTestData = new excel.Application();
             excel.Workbook xlWBTestData = xlAppTestData.Workbooks.Open(testDataContainer);
-            string executablePath = exeContainer.Substring(0, exeContainer.ToString().LastIndexOf(@"\"));
+            string executablePath = exeContainer.Substring(0, exeContainer.ToString().LastIndexOf(@"\")+1);
 
             streamWriter.WriteLine(rootDrive);
             streamWriter.WriteLine("CD " + executablePath);
@@ -55,11 +55,11 @@ namespace MoE.ERS.Tests.Automation.TestRunner
                     continue;                
                 ExecutorBuilder(lstTestData);
             }
+            string directoryPath = Directory.GetCurrentDirectory()
+                                      .Substring(0, Directory.GetCurrentDirectory().IndexOf("MoE.ERS.Tests.Automation"))                                     
+                                         + @"MoE.ERS.Tests.Automation\MoE.ERS.Tests.Automation\bin\Debug\MoE.ERS.Tests.Automation.dll";
             streamWriter.WriteLine("nunit3-console --test=" + executableCMD.ToString().Remove(executableCMD.ToString().Length - 1, 1)
-                                       + " " + System.Reflection.Assembly.GetExecutingAssembly().Location
-                                       .Substring(0, System.Reflection.Assembly.GetExecutingAssembly()
-                                       .Location.LastIndexOf("MoE.ERS.Tests.Automation.TestRunner"))
-                                       + @"\MoE.ERS.Tests.Automation\bin\Debug\MoE.ERS.Tests.Automation.dll");
+                                       + " " + directoryPath);
             streamWriter.Flush();
             streamWriter.Close();
             xlWBTestData.Close();
@@ -71,8 +71,8 @@ namespace MoE.ERS.Tests.Automation.TestRunner
             int delimitPosition = exeContainer.LastIndexOf("\\")+1;
             string fileName = exeContainer.Substring(delimitPosition,exeContainer.Length - delimitPosition);
             Process process = new Process();
-            process.StartInfo.WorkingDirectory= 
-            process.StartInfo.FileName = exeContainer;
+            process.StartInfo.WorkingDirectory = workingDirectory;
+            process.StartInfo.FileName = fileName;
             process.StartInfo.CreateNoWindow = false;
             process.Start();
             process.WaitForExit();

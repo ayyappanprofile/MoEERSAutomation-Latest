@@ -14,10 +14,10 @@ namespace MoE.ERS.Tests.Automation.DataSource
         public static ApplicationConfiguration GetConfiguredData()
         {
             ApplicationConfiguration appConfiguration = new ApplicationConfiguration();           
-            string configurationFile = File.ReadAllText(System.Reflection.Assembly.GetExecutingAssembly().Location
-                                                        .Substring(0, System.Reflection.Assembly.GetExecutingAssembly().Location.IndexOf("MoE.ERS.Tests.Automation"))
-                                                        + "MoE.ERS.Tests.Automation\\MoE.ERS.Tests.Automation.TestRunner\\Configuration.xml");
-            
+            string configurationFile = File.ReadAllText(Directory.GetCurrentDirectory()
+                                                         .Substring(0, Directory.GetCurrentDirectory().IndexOf("MoE.ERS.Tests.Automation"))
+                                                         + "MoE.ERS.Tests.Automation\\MoE.ERS.Tests.Automation.TestRunner\\"
+                                                         + "Configuration.xml");            
             XmlDocument configDoc = new XmlDocument();
             configDoc.LoadXml(configurationFile);
             XmlNode testContainerNode = configDoc.GetElementsByTagName("TestContainer")[0];
