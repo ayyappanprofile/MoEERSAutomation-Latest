@@ -22,7 +22,7 @@ namespace MoE.ERS.Tests.Automation.TestRunner
             Console.WriteLine("Starting TestExecution...");
             Console.WriteLine("Generating TestExecutables...");
             GenerateTestExecutor(appConfiguration.TestDataContainer,appConfiguration.ExecutableContainer);
-            if (File.Exists(ConfigurationManager.AppSettings["ExecutableContainer"].ToString()))
+            if (File.Exists(appConfiguration.ExecutableContainer))
             {
                 Console.WriteLine("Tirggering TestExecutor...");
                 TriggerTestExecutor(appConfiguration.ExecutableContainer);
