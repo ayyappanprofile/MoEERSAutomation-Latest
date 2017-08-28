@@ -28,14 +28,13 @@ namespace MoE.ERS.Tests.Automation.TestScripts
             extentHtmlReportGenerator = ExtentHtmlReportGenerator.GetReportInstance();
             extentTest = extentHtmlReportGenerator.extentReports.CreateTest("FindFormRT Page");
         }
+        #region Private Methods
         private void InitPages()
         {
             logInPage = new LogInPage(this.WebDriver);
             welcomePage = new WelcomePage(this.WebDriver);
             findFormRTPage = new FindAFormRTPage(this.WebDriver);
         }
-
-        #region Private Methods
         private void LoadFindFormRT()
         {
             InitiateDriver();
@@ -58,7 +57,6 @@ namespace MoE.ERS.Tests.Automation.TestScripts
             findFormRTPage.ClickOnFundingTypeOption(int.Parse(ftSelectionIndex));
             ElementAccessors.Wait(2);
         }
-
         #endregion Private Methods
 
         #region Organization-TestMethods
@@ -355,12 +353,14 @@ namespace MoE.ERS.Tests.Automation.TestScripts
                 extentTest.AddScreenCaptureFromPath(GetScreenShot.GetInstance().ScreenshotPath + TestContext.CurrentContext.Test.Name + ".png");
                 extentTest.Log(Status.Fail, stackTrace + errorMessage);
             }
-            this.WebDriver.Close();
+            ElementAccessors.Wait(1);
+            this.WebDriver.Quit();
         }
         [OneTimeTearDown]
         public void GenerateReport()
         {
             extentHtmlReportGenerator.extentReports.Flush();
+            this.WebDriver.Quit();
         }
     }
 }

@@ -15,14 +15,18 @@ namespace MoE.ERS.Tests.Automation.TestRunner
 {
     public class TestRunner
     {
-        private static StringBuilder executableCMD = new StringBuilder();
-   
+        private static StringBuilder executableCMD = new StringBuilder();   
         static void Main(string[] args)
         {
-            ApplicationConfiguration appConfiguration = ApplicationConfigurationData.GetConfiguredData();           
+            ApplicationConfiguration appConfiguration = ApplicationConfigurationData.GetConfiguredData();
+            Console.WriteLine("Starting TestExecution...");
+            Console.WriteLine("Generating TestExecutables...");
             GenerateTestExecutor(appConfiguration.TestDataContainer,appConfiguration.ExecutableContainer);
             if (File.Exists(ConfigurationManager.AppSettings["ExecutableContainer"].ToString()))
+            {
+                Console.WriteLine("Tirggering TestExecutor...");
                 TriggerTestExecutor(appConfiguration.ExecutableContainer);
+            }           
         }    
 
         private static void ExecutorBuilder(List<EntityBase> lstTestData)
@@ -58,12 +62,17 @@ namespace MoE.ERS.Tests.Automation.TestRunner
                                        + @"\MoE.ERS.Tests.Automation\bin\Debug\MoE.ERS.Tests.Automation.dll");
             streamWriter.Flush();
             streamWriter.Close();
+            xlWBTestData.Close();
+            xlAppTestData.Quit();
         }
         private static void TriggerTestExecutor(string exeContainer)
         {
+            string workingDirectory = exeContainer.Substring(0, exeContainer.ToString().LastIndexOf(@"\"));
+            int delimitPosition = exeContainer.LastIndexOf("\\")+1;
+            string fileName = exeContainer.Substring(delimitPosition,exeContainer.Length - delimitPosition);
             Process process = new Process();
-            process.StartInfo.WorkingDirectory= exeContainer.Substring(0, exeContainer.ToString().LastIndexOf(@"\"));
-            process.StartInfo.FileName = "TestDataAutomated.bat";
+            process.StartInfo.WorkingDirectory= 
+            process.StartInfo.FileName = exeContainer;
             process.StartInfo.CreateNoWindow = false;
             process.Start();
             process.WaitForExit();

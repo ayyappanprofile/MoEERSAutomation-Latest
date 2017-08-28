@@ -78,6 +78,7 @@ namespace MoE.ERS.Tests.Automation.DataSource
                     connection.Open();
                     var entityList = connection.Query<Entity>(query);                
                     connection.Close();
+                    connection.Dispose();
                     return entityList;
                 }
             }

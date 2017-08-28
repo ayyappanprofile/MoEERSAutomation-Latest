@@ -23,65 +23,62 @@ namespace MoE.ERS.Tests.Automation.TestScripts
         private ExtentHtmlReportGenerator extentHtmlReportGenerator;
         private List<Welcome> welcomePageData = null;
 
+
+        #region Private Methods
+        private void InitPages()
+        {
+            logInPage = new LogInPage(this.WebDriver);
+            welcomePage = new WelcomePage(this.WebDriver);
+        }
+        private void LoadWelcomePage()
+        {
+            InitiateDriver();
+            NavigateToPage();
+            InitPages();
+        }
+        #endregion Private Methods
+
         [OneTimeSetUp]
         public void InitReportInstance()
         {
             extentHtmlReportGenerator = ExtentHtmlReportGenerator.GetReportInstance();            
             extentTest = extentHtmlReportGenerator.CreateTest("Welcome Page");            
         }
-        private void InitPages()
-        {
-            logInPage = new LogInPage(this.WebDriver);
-            welcomePage = new WelcomePage(this.WebDriver);
-        }
-
         [Test]
         public void ValidateMakeANewRequestButtonExistence()
-        {   
-            InitiateDriver();
-            NavigateToPage();
-            InitPages();
+        {
+            LoadWelcomePage();
             logInPage.LogIn(UserName, Password);
             bool isPassed = welcomePage.IsMakeANewRequestButtonDisplayed();
             Assert.AreEqual(true, isPassed);           
         }
         [Test]
         public void ValidateViewAllRequestsButtonExistence()
-        {            
-            InitiateDriver();
-            NavigateToPage();
-            InitPages();
+        {
+            LoadWelcomePage();
             logInPage.LogIn(UserName, Password);
             bool isPassed = welcomePage.IsViewAllRequeststButtonDisplayed();
             Assert.AreEqual(true, isPassed);           
         }
         public void ValidateMakeANewRequestButtonEnabled()
-        {           
-            InitiateDriver();
-            NavigateToPage();
-            InitPages();
+        {
+            LoadWelcomePage();
             logInPage.LogIn(UserName, Password);
             bool isPassed = welcomePage.IsMakeANewRequestButtonEnabled();
-            Assert.AreEqual(true, isPassed);
-          
+            Assert.AreEqual(true, isPassed);          
         }
         [Test]
         public void ValidateViewAllRequestsButtonEnabled()
-        {            
-            InitiateDriver();
-            NavigateToPage();
-            InitPages();
+        {
+            LoadWelcomePage();
             logInPage.LogIn(UserName, Password);
             bool isPassed = welcomePage.IsViewAllRequestsButtonEnabled();
             Assert.AreEqual(true, isPassed);            
         }
-
         [Test]
         public void ValidateMakeANewRequestButtonCaption()
-        {            
-            InitiateDriver();
-            NavigateToPage();
-            InitPages();
+        {
+            LoadWelcomePage();
             logInPage.LogIn(UserName, Password);
             string actual = welcomePage.GetMakeANewRequestCaption();
             welcomePageData = RealTestData<Welcome>.GetTestData("Welcome", "*", "TestName='" + new StackFrame(0).GetMethod().Name + "'");
@@ -90,37 +87,29 @@ namespace MoE.ERS.Tests.Automation.TestScripts
         }
         [Test]
         public void ValidateViewAllRequestsButtonCaption()
-        {            
-            InitiateDriver();
-            NavigateToPage();
-            InitPages();
+        {
+            LoadWelcomePage();
             logInPage.LogIn(UserName, Password);
             string actual = welcomePage.GetMakeANewRequestCaption();
             welcomePageData = RealTestData<Welcome>.GetTestData("Welcome", "*", "TestName='" + new StackFrame(0).GetMethod().Name + "'");
             foreach (Welcome welcome in welcomePageData)
-                Assert.AreEqual(welcome.Caption, welcomePage.GetViewAllRequestsCaption());
-           
+                Assert.AreEqual(welcome.Caption, welcomePage.GetViewAllRequestsCaption());           
         }
         [Test]
         public void ValidateRequestButtonsAlignment()
-        {            
-            InitiateDriver();
-            NavigateToPage();
-            InitPages();
+        {
+            LoadWelcomePage();
             logInPage.LogIn(UserName, Password);
             bool isPassed = welcomePage.AreRequestButtonsAlignedCenter();
-            Assert.AreEqual(true, isPassed);        
+            Assert.AreEqual(true, isPassed);       
         }
         [Test]
         public void MakeANewRequest()
-        {            
-            InitiateDriver();
-            NavigateToPage();
-            InitPages();
+        {
+            LoadWelcomePage();
             logInPage.LogIn(UserName, Password);
             welcomePage.ClickOnMakeARequestButton();           
         }
-
         [TearDown]
         public void TearDown()
         {
@@ -135,12 +124,14 @@ namespace MoE.ERS.Tests.Automation.TestScripts
                 extentTest.AddScreenCaptureFromPath(GetScreenShot.GetInstance().ScreenshotPath + TestContext.CurrentContext.Test.Name + ".png");
                 extentTest.Log(Status.Fail, stackTrace + errorMessage);
             }
-            this.WebDriver.Close();
+            ElementAccessors.Wait(1);
+            this.WebDriver.Quit();
         }
         [OneTimeTearDown]
         public void GenerateReport()
         {           
             extentHtmlReportGenerator.extentReports.Flush();
+            this.WebDriver.Quit();
         }       
     }
 }
