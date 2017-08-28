@@ -19,18 +19,15 @@ namespace MoE.ERS.Tests.Automation.BaseLibrary
         public static IWebDriver Create(string browserType)
         {
             string driverPath = System.Reflection.Assembly.GetExecutingAssembly().Location.Substring(0, System.Reflection.Assembly.GetExecutingAssembly().Location.IndexOf("Debug") + 5);
-            switch (browserType)
+            switch (browserType.ToUpper())
             {
-                case "chrome":
+                case "CHROME":
                     return new ChromeDriver(driverPath);
-
                 case "IE":                    
-                    return new InternetExplorerDriver(driverPath, (InternetExplorerOptions)GetDriverOptions());
-               
+                    return new InternetExplorerDriver(driverPath, (InternetExplorerOptions)GetDriverOptions());               
                 default:
                     return new InternetExplorerDriver();
             }
-
         }
 
         public static DriverOptions GetDriverOptions()
