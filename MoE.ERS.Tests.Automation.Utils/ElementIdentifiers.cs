@@ -41,6 +41,7 @@ namespace MoE.ERS.Tests.Automation.Utils.ElementIdentifiers
         public const string TEACHER_DROPDOWN = "//select[@id='select_teacher']";
         public const string TEACHER_DRP_ELEMENTS = "//li[@role='treeitem']";     
         public const string TEACHER_HELP_LINK = "//div[@id='section_teachers']//a[@class='info-link']";
+        public const string TEACHER_DRP_SELVALUE = "//span[@id='select2-select_teacher-container']";
 
         public const string FORM_BUTTON = "create_request_button";
 

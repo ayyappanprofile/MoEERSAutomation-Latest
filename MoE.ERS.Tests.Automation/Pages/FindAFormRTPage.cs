@@ -60,6 +60,9 @@ namespace MoE.ERS.Tests.Automation.Pages
         [FindsBy(How = How.XPath, Using = ElementIdentifiers.TEACHER_HELP_LINK)]
         public IWebElement TeacherHelpLink { get; set; }
 
+        [FindsBy(How = How.XPath, Using = ElementIdentifiers.TEACHER_DRP_SELVALUE)]
+        public IWebElement TeacherDropdownSelValue { get; set; }
+
         [FindsBy(How = How.Id, Using = ElementIdentifiers.FORM_BUTTON)]
         public IWebElement CreateRequestButton { get; set; }
 
@@ -285,6 +288,16 @@ namespace MoE.ERS.Tests.Automation.Pages
             try
             {
                 ElementAccessors.InputTextBox(FTText, DropdownSearchTextBox);
+            }
+            catch (Exception)
+            { throw; }
+        }
+
+        public string GetSelectedTeacher()
+        {
+            try
+            {
+                return TeacherDropdownSelValue.GetAttribute("title");
             }
             catch (Exception)
             { throw; }

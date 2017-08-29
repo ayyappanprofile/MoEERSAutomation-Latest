@@ -250,9 +250,17 @@ namespace MoE.ERS.Tests.Automation.TestScripts
             List<string> lstDropdownElementsCaption;            
             LoadFindFormRT();
 
-            lstDropdownElementsCaption = findFormRTPage.GetTeacherDropdownElementsCaption();
-            bool validationResult = lstDropdownElementsCaption.Count > 0;
-            Assert.AreEqual(true, validationResult);           
+            findFormRTPageData = RealTestData<FindFormRT>.GetTestData("FindFormRT", "*", "TestName='" + new StackFrame(0).GetMethod().Name + "'");
+            foreach (FindFormRT findFormRT in findFormRTPageData)
+            {
+                SelectOrganization(findFormRT.OrgTextActual, findFormRT.OrgSelectionIndex);
+                SelectFundingType(findFormRT.FTSelectionIndex);
+                lstDropdownElementsCaption = findFormRTPage.GetTeacherDropdownElementsCaption();
+
+                Assert.AreEqual(true, (lstDropdownElementsCaption.Count == 1
+                                      && findFormRTPage.GetSelectedTeacher().Equals(lstDropdownElementsCaption[0]))
+                                      || (lstDropdownElementsCaption.Count > 0));
+            }                
         }
         [Test]
         public void ValidateTeacherSearchResults()
