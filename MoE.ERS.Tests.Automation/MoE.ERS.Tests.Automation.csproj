@@ -93,7 +93,6 @@
     <Compile Include="Pages\FindAFormRTPage.cs" />
     <Compile Include="Pages\LogInPage.cs" />
     <Compile Include="Pages\WelcomePage.cs" />
-    <Compile Include="TestDataConstants.cs" />
     <Compile Include="TestScripts\FindAFormRTTestScripts.cs" />
     <Compile Include="TestScripts\WelcomeTestScripts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
